@@ -17,7 +17,7 @@
 		
 	/** caminho no server para o sistema **/
 	if (!defined("BASEURL")) {
-		define("BASEURL", "/");
+		define("BASEURL", "/wda_crud/");
 	}	
 		
 	/** caminho do arquivo de banco de dados **/
@@ -27,4 +27,7 @@
 	/** caminhos dos templates de header e footer **/
 	define("HEADER_TEMPLATE", ABSPATH . "inc/header.php");
 	define("FOOTER_TEMPLATE", ABSPATH . "inc/footer.php");
+
+	//Caminhos da classe pdf
+	define("PDF", ABSPATH . "inc/pdf.php");
 ?>
