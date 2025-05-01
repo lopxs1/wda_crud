@@ -123,7 +123,7 @@ function upload($pasta_destino, $arquivo_destino, $tipo_arquivo, $nome_temp, $ta
 				throw new Exception("Desculpe, o arquivo não pode ser enviado!");
 			}
 		}
-	} catch (Exeception $e) {
+	} catch (Exception $e) {
 		$_SESSION['message'] = "Aconteceu um erro: " . $e->GetMessage();
 		$_SESSION['type'] = "danger";
 	}
@@ -199,8 +199,10 @@ function delete($id = null) {
 }
 
 //Gerando PDF
-function PDF($p = null)
+function dPDF($p = null)
 {
+    require_once '../inc/pdf.php';
+
     $pdf = new PDF();
     $pdf->AliasNbPages();
     $pdf->AddPage();

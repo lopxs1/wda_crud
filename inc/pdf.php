@@ -7,13 +7,13 @@ class PDF extends FPDF
     function header()
     {
         //logo
-        //$this->Image('logo.png'10,6,30);
+        $this->Image('../img/logo2.png',10,10,-140);
         //arial bold 15
         $this->SetFont('Arial', 'B',15);
         //move to right
         //$this->Cell(40);
         //title
-        $this->Cell(180,10,"Título do PDF",1,0,'C');
+        $this->Cell(180,10,"Lista de Usuarios",1,0,'C');
         //line break
         $this->Ln(20);
     }
@@ -25,6 +25,6 @@ class PDF extends FPDF
         //arial italic
         $this->SetFont('Arial','I', 8);
         //page number
-        $this->Cell(0,10,'Página ' .$this->PageNo(). ' de {nb}',0,0,'C');
+        $this->Cell(0,10, 'Pagina ' .$this->PageNo(). ' de {nb}',0,0,'C');
     }
 }
