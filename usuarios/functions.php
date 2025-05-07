@@ -210,12 +210,13 @@ function dPDF($p = null)
     $usuarios = null;
     if($p)
     {
-        $usuarios = filter("usuarios", "nome like '%" . $p . "%'");
+        $usuarios = filter($p);
     }
     else
     {
         $usuarios = find_all("usuarios");
     }
+    
     foreach($usuarios as $usuario)
     {
         $pdf->Cell(0,10, $usuario['id'] . " - " . $usuario['nome'] . " - " . $usuario['user'],0,1);

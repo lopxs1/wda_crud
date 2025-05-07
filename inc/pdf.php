@@ -13,7 +13,7 @@ class PDF extends FPDF
         //move to right
         //$this->Cell(40);
         //title
-        $this->Cell(180,10,"Lista de Usuarios",1,0,'C');
+        $this->Cell(180,10,"Lista de Usuários",1,0,'C');
         //line break
         $this->Ln(20);
     }
@@ -25,6 +25,12 @@ class PDF extends FPDF
         //arial italic
         $this->SetFont('Arial','I', 8);
         //page number
-        $this->Cell(0,10, 'Pagina ' .$this->PageNo(). ' de {nb}',0,0,'C');
+        $this->Cell(0,10, 'Página ' .$this->PageNo(). ' de {nb}',0,0,'C');
+    }
+
+    function converteTexto($str) 
+    {
+        $str = iconv("UTF-8", "windows-1252", $str);
+        return $str;
     }
 }

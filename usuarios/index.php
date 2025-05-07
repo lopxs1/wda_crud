@@ -3,10 +3,8 @@ require("functions.php");
 require_once('../config.php');
 index();
 if (isset($_GET['pdf'])) {
-	if ($_GET['pdf'] == "ok") {
-		dPDF($_GET['pdf'] === "ok" ? null : $_GET['pdf']);
-		exit;
-	}
+    dPDF($_GET['pdf'] === "ok" ? null : $_GET['pdf']); 
+    exit;
 }
 ?>
 <?php if (!isset($_SESSION)) session_start(); ?>
@@ -22,7 +20,7 @@ if (isset($_GET['pdf'])) {
 				<div class="col-sm-6 text-right h2">
 					<a class="btn btn-primary" href="add.php"><i class="fa fa-plus"></i> Novo Usuário</a>
 					<?php if ($_SERVER["REQUEST_METHOD"] == "POST") : ?>
-						<a class="btn btn-danger" href="index.php?pdf=<?php echo $_POST['users']; ?>"><i class="fa-solid fa-file-pdf"></i> Listagem</a>
+						<a class="btn btn-danger" href="index.php?pdf=<?php echo $_POST['users']; ?>" target="_blank"><i class="fa-solid fa-file-pdf"></i> Listagem</a>
 					<?php else : ?>
 						<a class="btn btn-danger" href="index.php?pdf=ok" target="_blank"><i class="fa-solid fa-file-pdf"></i> Listagem</a>
 					<?php endif ?>
@@ -31,7 +29,7 @@ if (isset($_GET['pdf'])) {
 			</div>
 		</header>
 
-		<form name="filtro" action="index.php" method="post">
+		<form name="filter" action="index.php" method="post">
 			<div class="row">
 				<div class="form-group col-md-4">
 					<div class="input-group mb-3">
