@@ -3,34 +3,30 @@ require ("fpdf.php");
 
 class PDF extends FPDF
 {
-    //page header
     function header()
     {
-        //logo
-        $this->Image('../img/logo2.png',10,10,-140);
-        //arial bold 15
-        $this->SetFont('Arial', 'B',15);
-        //move to right
-        //$this->Cell(40);
-        //title
-        $this->Cell(180,10,"Lista de Usuários",1,0,'C');
-        //line break
+        $this->Image('../img/logo2.png', 10, 10, -140);
+        $this->SetFont('Arial', 'B', 15);
+
+        // Aplicando a conversão no cabeçalho
+        $titulo = $this->converteTexto("Lista de Usuários");
+        $this->Cell(180, 10, $titulo, 1, 0, 'C');
         $this->Ln(20);
     }
 
     function footer()
     {
-        //position at 1.5cm from the bottom
         $this->SetY(-15);
-        //arial italic
-        $this->SetFont('Arial','I', 8);
-        //page number
-        $this->Cell(0,10, 'Página ' .$this->PageNo(). ' de {nb}',0,0,'C');
+        $this->SetFont('Arial', 'I', 8);
+
+        // Aplicando a conversão no rodapé
+        $pagina = $this->converteTexto('Página ' . $this->PageNo() . ' de {nb}');
+        $this->Cell(0, 10, $pagina, 0, 0, 'C');
     }
 
     function converteTexto($str) 
     {
-        $str = iconv("UTF-8", "windows-1252", $str);
-        return $str;
+        return iconv("UTF-8", "ISO-8859-1//TRANSLIT", $str);
     }
 }
+?>

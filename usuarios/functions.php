@@ -217,10 +217,12 @@ function dPDF($p = null)
         $usuarios = find_all("usuarios");
     }
     
-    foreach($usuarios as $usuario)
-    {
-        $pdf->Cell(0,10, $usuario['id'] . " - " . $usuario['nome'] . " - " . $usuario['user'],0,1);
-    }
+    foreach ($usuarios as $usuario) 
+{
+    $texto = $pdf->converteTexto($usuario['id'] . " - " . $usuario['nome'] . " - " . $usuario['user']);
+    $pdf->Cell(0, 10, $texto, 0, 1);
+}
+
     /*for($i=l;$i<=40;i++)
     {
         $pdf->Cell(0,10,'Printing line number ' .$i,0,l);
