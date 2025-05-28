@@ -30,4 +30,7 @@
 
 	//Caminhos da classe pdf
 	define("PDF", ABSPATH . "inc/pdf.php");
+
+	/** caminhos para o modal do cookie **/
+	define ("COOKIE_TEMPLATE", ABSPATH . "inc/cookiemodal.php");
 ?>

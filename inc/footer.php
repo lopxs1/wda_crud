@@ -1,5 +1,6 @@
 			<hr>
 		</main> <!-- /container -->
+		<?php include(COOKIE_TEMPLATE); //linha incluida ?>
 	</body>
 	<footer class="container-fluid bg-dark p-3 text-center mt-2">
 		<?php $data = new Datetime("now", new DateTimeZone("America/Sao_Paulo")) ?>
