@@ -207,6 +207,11 @@ function dPDF($p = null)
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->SetFont('Times','',12);
+    $pdf->Cell(20, 10, $pdf->converteTexto('ID'), 1);
+    $pdf->Cell(80, 10, $pdf->converteTexto('Nome'), 1);
+    $pdf->Cell(50, 10, $pdf->converteTexto('User'), 1);
+    $pdf->Cell(30, 10, $pdf->converteTexto('Foto'), 1);
+    $pdf->Ln();
     $usuarios = null;
     if($p)
     {
@@ -217,11 +222,24 @@ function dPDF($p = null)
         $usuarios = find_all("usuarios");
     }
     
-    foreach ($usuarios as $usuario) 
-{
-    $texto = $pdf->converteTexto($usuario['id'] . " - " . $usuario['nome'] . " - " . $usuario['user']);
-    $pdf->Cell(0, 10, $texto, 0, 1);
-}
+    foreach ($usuarios as $usuario) {
+        $pdf->Cell(20, 30, $pdf->converteTexto($usuario['id']), 1);
+        $pdf->Cell(80, 30, $pdf->converteTexto($usuario['nome']), 1);
+        $pdf->Cell(50, 30, $pdf->converteTexto($usuario['user']), 1);
+    
+        $x = $pdf->GetX();
+        $y = $pdf->GetY();
+    
+        $pdf->Cell(30, 30, '', 1);
+    
+        $foto = !empty($usuario['foto']) ? __DIR__ . "/img/" . $usuario['foto'] : __DIR__ . "/../img/semimagem.jpg";
+    
+        if (file_exists($foto)) {
+            $pdf->Image($foto, $x + 2, $y + 2, 26, 26);
+        }
+    
+        $pdf->Ln();
+    }    
 
     /*for($i=l;$i<=40;i++)
     {

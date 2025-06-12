@@ -5,13 +5,20 @@ class PDF extends FPDF
 {
     function header()
     {
-        $this->Image('../img/logo2.png', 10, 10, -140);
-        $this->SetFont('Arial', 'B', 15);
-
-        // Aplicando a conversão no cabeçalho
-        $titulo = $this->converteTexto("Lista de Usuários");
-        $this->Cell(180, 10, $titulo, 1, 0, 'C');
-        $this->Ln(20);
+        if ($this->CurOrientation == 'L') {
+            $this->Image('../img/logo2.png', 10, 10, -140);
+            $this->SetFont('Arial', 'B', 15);
+            $titulo = $this->converteTexto("Lista de Usuários");
+            $this->Cell(275, 10, $titulo, 1, 0, 'C');
+            $this->Ln(20);
+        }
+        else {
+            $this->Image('../img/logo2.png', 10, 10, -140);
+            $this->SetFont('Arial', 'B', 15);
+            $titulo = $this->converteTexto("Lista de Usuários");
+            $this->Cell(180, 10, $titulo, 1, 0, 'C');
+            $this->Ln(20);
+        }
     }
 
     function footer()

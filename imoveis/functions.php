@@ -184,5 +184,71 @@
 
 		header('location: index.php');
 	}
+
+	function cortarTexto($pdf, $texto, $larguraMax) 
+	{
+		$textoConvertido = $pdf->converteTexto($texto);
+		$tamanhoTexto = $pdf->GetStringWidth($textoConvertido);
+		if ($tamanhoTexto <= $larguraMax) {
+			return $textoConvertido;
+		} else {
+			while ($pdf->GetStringWidth($textoConvertido . '...') > $larguraMax && strlen($textoConvertido) > 0) {
+				$textoConvertido = substr($textoConvertido, 0, -1);
+			}
+			return $textoConvertido . '...';
+		}
+	}	
+
+	function dPDF($p = null)
+	{
+    require_once '../inc/pdf.php';
+
+	$pdf = new PDF('L');
+	$pdf->AliasNbPages();
+	$pdf->AddPage();
+	$pdf->SetFont('Times','',12);
+
+	$altura = 30;
+
+	$pdf->Cell(10, 10, $pdf->converteTexto('ID'), 1);
+	$pdf->Cell(50, 10, $pdf->converteTexto('Endereço'), 1);
+	$pdf->Cell(40, 10, $pdf->converteTexto('Bairro'), 1);
+	$pdf->Cell(25, 10, $pdf->converteTexto('Cidade'), 1);
+	$pdf->Cell(120, 10, $pdf->converteTexto('Descrição'), 1);
+	$pdf->Cell(30, 10, $pdf->converteTexto('Foto'), 1);
+	$pdf->Ln();
+
+	$imoveis = null;
+	if ($p) {
+		$imoveis = filter($p);
+	} else {
+		$imoveis = find_all("imoveis");
+	}
+
+	foreach ($imoveis as $imovel) {
+		$pdf->Cell(10, $altura, cortarTexto($pdf, $imovel['id'], 10), 1);
+		$pdf->Cell(50, $altura, cortarTexto($pdf, $imovel['address'], 50), 1);
+		$pdf->Cell(40, $altura, cortarTexto($pdf, $imovel['hood'], 37), 1);
+		$pdf->Cell(25, $altura, cortarTexto($pdf, $imovel['city'], 25), 1);
+		$pdf->Cell(120, $altura, cortarTexto($pdf, $imovel['descr'], 120), 1);
+
+		$x = $pdf->GetX();
+		$y = $pdf->GetY();
+
+		$pdf->Cell(30, $altura, '', 1);
+
+		$foto = !empty($imovel['photo']) ? __DIR__ . "/img/" . $imovel['photo'] : __DIR__ . "/../img/semimagem.jpg";
+
+		if (file_exists($foto)) {
+			$pdf->Image($foto, $x + 2, $y + 2, 26, 26);
+		}
+
+		$pdf->Ln();
+	}
+
+	$pdf->Output();
+
+
+	}
 	
 ?>

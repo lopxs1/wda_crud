@@ -1,6 +1,10 @@
 			<?php
 				include("functions.php");
 				index();
+				if (isset($_GET['pdf'])) {
+					dPDF($_GET['pdf'] === "ok" ? null : $_GET['pdf']); 
+					exit;
+				}
 				if (!isset($_SESSION)) session_start();
 			?>
 
@@ -15,6 +19,11 @@
 					<?php if (isset($_SESSION['user'])) : ?>
 						<a class="btn btn-primary" href="add.php"><i class="fa fa-plus"></i> Novo Imóvel</a>
 					<?php endif; ?>
+					<?php if ($_SERVER["REQUEST_METHOD"] == "POST") : ?>
+						<a class="btn btn-danger" href="index.php?pdf=<?php echo $_POST['users']; ?>" target="_blank"><i class="fa-solid fa-file-pdf"></i> Listagem</a>
+					<?php else : ?>
+						<a class="btn btn-danger" href="index.php?pdf=ok" target="_blank"><i class="fa-solid fa-file-pdf"></i> Listagem</a>
+					<?php endif ?>
 						<a class="btn btn-info text-light" href="index.php"><i class="fa fa-refresh"></i> Atualizar</a>
 					</div>
 				</div>
