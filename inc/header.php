@@ -27,7 +27,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-primary fixed-top p-1" data-bs-theme="primary">
-        <a href="<?php echo BASEURL; ?>index.php">
+        <a href="<?php echo BASEURL; ?>">
             <img src="<?php echo BASEURL; ?>img/logo.png" class="p-3 navbar-brand" alt="Logo">
         </a>
         <div class="container-fluid">
