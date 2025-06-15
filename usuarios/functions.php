@@ -13,7 +13,9 @@ function filter($searchTerm) {
         die("Erro de conexão: " . $conn->connect_error);
     }
 
-    $searchTerm = trim($conn->real_escape_string($searchTerm)); // Sanitiza o termo de busca
+    $conn->set_charset("utf8mb4");
+
+    $searchTerm = trim($conn->real_escape_string($searchTerm));
     $query = "SELECT * FROM usuarios WHERE nome LIKE '%$searchTerm%'";
     $result = $conn->query($query);
 
